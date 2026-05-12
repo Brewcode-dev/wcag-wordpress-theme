@@ -1,0 +1,17 @@
+/*
+Theme Name: WCAG WP
+Theme URI: https://example.com/wcag-wp
+Author: Brewcode
+Author URI: https://example.com
+Description: Fully WCAG 2.1 AA compliant WordPress theme. Hybrid theme with Elementor compatibility, custom accessible Elementor widgets, WCAG Customizer panel and frontend accessibility widget. Supports keyboard navigation, screen readers, sufficient color contrast (4.5:1 text / 3:1 UI), text resize up to 200%, reflow at 320px, visible focus indicators, skip links, ARIA landmarks, semantic HTML5 and reduced-motion preferences.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wcag-wp
+Tags: accessibility-ready, wcag, custom-colors, custom-menu, featured-images, threaded-comments, translation-ready, rtl-language-support, blog, news, education
+*/
+
+/* All visual styles live in /assets/css/main.css. This file declares theme metadata only. */

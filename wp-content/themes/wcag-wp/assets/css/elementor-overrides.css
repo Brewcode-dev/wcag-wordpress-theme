@@ -1,0 +1,71 @@
+/*
+ * elementor-overrides.css
+ *
+ * Hardens default Elementor widgets so they meet WCAG 2.1 AA without forcing the editor
+ * to rebuild pages. Loaded after Elementor's own stylesheets so these win specificity.
+ */
+
+/* All Elementor buttons must have a visible focus ring and minimum tap target. */
+.elementor-button {
+	min-height: var(--wcag-target-min, 44px) !important;
+	min-width: var(--wcag-target-min, 44px) !important;
+}
+.elementor-button:focus,
+.elementor-button:focus-visible {
+	outline: 3px solid var(--wcag-color-focus, #ffbf00) !important;
+	outline-offset: 2px !important;
+}
+
+/* Elementor headings: keep them at semantic font sizes regardless of widget. */
+.elementor-heading-title {
+	line-height: 1.25;
+}
+
+/* Elementor "accordion" default lacks proper aria — flag visually for editors. */
+body.logged-in.wp-admin-bar .elementor-accordion-item:not([aria-expanded]) {
+	outline: 2px dashed #b40000;
+}
+
+/* Elementor image widget: enforce alt requirement visually when missing. */
+.elementor-image img:not([alt]) {
+	outline: 3px dashed #b40000 !important;
+	outline-offset: -3px;
+}
+
+/* Elementor form fields: ensure visible focus & 44px height. */
+.elementor-field-group input,
+.elementor-field-group textarea,
+.elementor-field-group select {
+	min-height: var(--wcag-target-min, 44px) !important;
+	border: 2px solid var(--wcag-color-border, #767676) !important;
+}
+.elementor-field-group input:focus,
+.elementor-field-group textarea:focus,
+.elementor-field-group select:focus {
+	outline: 3px solid var(--wcag-color-focus, #ffbf00) !important;
+	outline-offset: 2px !important;
+	border-color: var(--wcag-color-primary, #0b5fff) !important;
+}
+
+/* Elementor tabs: ensure ARIA-related visual state. */
+.elementor-tab-title.elementor-active {
+	outline: 0;
+}
+.elementor-tab-title[aria-selected="true"] {
+	text-decoration: underline;
+}
+
+/* Elementor "icon list" links must be underlined for WCAG 1.4.1 in default theme. */
+.elementor-icon-list-item a {
+	text-decoration: underline;
+	text-underline-offset: 0.18em;
+}
+
+/* Elementor sticky / fixed elements respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+	.elementor-sticky,
+	.elementor-animation- {
+		animation: none !important;
+		transition: none !important;
+	}
+}

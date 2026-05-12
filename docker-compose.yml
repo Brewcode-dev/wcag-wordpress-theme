@@ -1,0 +1,64 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: wcag_wp_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wcag_net
+
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    container_name: wcag_wp_app
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('SCRIPT_DEBUG', true);
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/wcag-wp:/var/www/html/wp-content/themes/wcag-wp
+    networks:
+      - wcag_net
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    container_name: wcag_wp_cli
+    depends_on:
+      - db
+      - wordpress
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/wcag-wp:/var/www/html/wp-content/themes/wcag-wp
+    networks:
+      - wcag_net
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  wcag_net:

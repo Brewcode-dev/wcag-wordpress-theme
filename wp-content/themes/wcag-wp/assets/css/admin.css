@@ -1,0 +1,14 @@
+/*
+ * Admin-side helpers.
+ */
+
+.wcag-wp-admin-notice {
+	border-left: 4px solid #0b5fff;
+	background: #f4f6fb;
+	padding: 0.5rem 1rem;
+	margin: 1rem 0;
+}
+.wcag-wp-admin-notice.is-error {
+	border-left-color: #b40000;
+	background: #fff5f5;
+}
