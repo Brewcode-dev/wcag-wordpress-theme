@@ -37,6 +37,15 @@
 	letter-spacing: normal;
 }
 
+/* Theme's global button rule applies "padding: 0.5rem 1.25rem" which would eat
+ * the content area of our fixed-size icon-only buttons. Reset padding only on
+ * the icon-only controls (close + stepper buttons); other buttons (fab, reset)
+ * keep their own padding because they include visible text labels. */
+.wcag-a11y .wcag-a11y__close,
+.wcag-a11y .wcag-a11y__step {
+	padding: 0;
+}
+
 /* Anchor positions */
 .wcag-a11y--bottom-right { bottom: 20px; right: 20px; }
 .wcag-a11y--bottom-left  { bottom: 20px; left: 20px;  }
